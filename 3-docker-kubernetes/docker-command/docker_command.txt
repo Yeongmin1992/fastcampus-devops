@@ -1,0 +1,5 @@
+[docker 명령어]
+
+docker ps : 실행중인 도커 프로세스
+docker ps -a : 전체 도커 프로세스
+docker run nginx : 도커 이미지 실행
