@@ -19,3 +19,6 @@ echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https:/
 
 # Install kubectl
 sudo apt-get update && sudo apt-get install -y kubectl
+
+# cat > install-cubectl.sh 명령어 입력 후 위 내용 복붙하여 파일 생성
+# chomod u+x install-kubectl.sh 로 실행권한 부여
