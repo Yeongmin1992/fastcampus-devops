@@ -15,6 +15,7 @@ spec:
       containers:
       - name: mysql
         image: mysql:5.7
+        # 동일 폴더의 configmap.yaml 파일에서 설정한 환경변수 받기
         envFrom:
         - configMapRef:
             name: mysql-config

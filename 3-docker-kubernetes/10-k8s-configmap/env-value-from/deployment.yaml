@@ -18,6 +18,7 @@ spec:
         env:
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
+          # config map에서 원하는 데이터만 불러올 때 사용
             configMapKeyRef:
               name: mysql-config
               key: MYSQL_ROOT_PASSWORD

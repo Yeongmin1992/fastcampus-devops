@@ -9,13 +9,19 @@ services:
     ports:
     - 3000:3000
     volumes:
+    # 호스트의 grfana 설정 파일에 grafana 컨테이너가 제공하는 grafana 설정 파일을 read only로 마운트
     - ./files/grafana.ini:/etc/grafana/grafana.ini:ro
+    # 아래서 생성한 볼륨을 로컬 데이터 저장경로인 /var/lib/grafana에 마운트
     - grafana-data:/var/lib/grafana
     logging:
       driver: "json-file"
       options:
+        # 로그 파일 최대크기 8m, 로그 파일 최대 갯수 10개
         max-size: "8m"
         max-file: "10"
 
+# grafana-data로 볼륨 생성
 volumes:
   grafana-data: {}
+  
+# 네트워크는 grafana 프로젝트가 default bridge network를 만둘어주어서 생략

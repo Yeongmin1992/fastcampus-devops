@@ -15,6 +15,9 @@ services:
     - wordpress
 
   wordpress:
+    # db 컨테이너가 생성된 후 depends_on 컨테이너 생성
+    # db 컨테이너가 실행되었음을 알 수는 있지만, db 컨테이너가 실행 가능 성태인지 까지는 확인 불가
+    # 실행 가능 상태까지 확인하려면 entry point를 통해서 특정 sh 스크립트를 실행하여 확인이 필요
     depends_on:
     - db
     image: wordpress:latest
@@ -29,8 +32,10 @@ services:
     networks:
     - wordpress
 
+# {} 과 같이 옵션을 주지 않으면 기본 도커 볼륨을 생성
 volumes:
   db: {}
 
+# {}과 같이 옵션을 주지 않았을 때는 bridge 드라이버를 사용하여 네트워크 새엇ㅇ
 networks:
   wordpress: {}

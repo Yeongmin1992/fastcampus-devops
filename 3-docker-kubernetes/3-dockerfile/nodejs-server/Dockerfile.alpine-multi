@@ -19,13 +19,15 @@ WORKDIR /app
 # where available (npm@5+)
 COPY package*.json ./
 
-
+# build 스테이지와 realese 스테이지 모두 base를 기반으로 실행
 FROM base AS build
 RUN npm install
 # If you are building your code for production
 # RUN npm ci --only=production
 
 
+# build 스테이지와 realese 스테이지 모두 base를 기반으로 실행
+# --from=build 옵션으로 build 스테이지에서 /app/node_modules 경로에 생성된 파일들을 ./node_modules에 복사
 FROM base AS release
 COPY --from=build /app/node_modules ./node_modules
 # Bundle app source
