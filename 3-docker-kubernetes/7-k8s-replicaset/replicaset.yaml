@@ -1,12 +1,18 @@
+# pod와는 다르게 api version을 apps 그룹의 v1을 썼다!?
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
   name: hello
 spec:
+  # replica set의 옵션
   replicas: 3
+  # replica set은 label selector를 사용하여 pod를 관리함
+  # metLables label selector로 app: hello라는 label을 가진 아래의 pod를 관리함
   selector:
     matchLabels:
       app: hello
+  # replica set이 만드는 pod 테믚릿
+  # pod가 가질 metadata와 spec을 정의
   template:
     metadata:
       name: hello

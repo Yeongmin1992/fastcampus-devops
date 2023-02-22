@@ -36,6 +36,6 @@ services:
 volumes:
   db: {}
 
-# {}과 같이 옵션을 주지 않았을 때는 bridge 드라이버를 사용하여 네트워크 새엇ㅇ
+# {}과 같이 옵션을 주지 않았을 때는 bridge 드라이버를 사용하여 네트워크 생성
 networks:
   wordpress: {}

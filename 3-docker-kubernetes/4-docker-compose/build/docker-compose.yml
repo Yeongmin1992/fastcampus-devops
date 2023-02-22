@@ -2,6 +2,7 @@ version: "3.9"
 services:
   web:
     #container_name: "web"과 같이 서비스별 컨테이너 네임을 지정할 수 있지만 scaling시 오류 발생
+    # web 서비스의 경우 이미지를 명시하지 않고 . 으로 현재 디렉토리의 Dockerfile을 지정해 줌
     build: .
     # ports를 - "5000:5000"과 같이 host 포트를 지정할 수 있지만 scaling시 포트 중복으로 오류 발생
     ports:

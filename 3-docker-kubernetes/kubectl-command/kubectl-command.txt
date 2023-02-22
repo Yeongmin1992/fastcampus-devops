@@ -1,0 +1,8 @@
+kubectl은 쿠버네티스를 위한 cli 도구
+kustomize는 쿠버네티스의 매니페스트 파일을 좀 더 효율적으로 관리할 수 있도록 도와주는 도구
+
+minikube start : 미니쿠베 시작
+kubectl get node
+kubectl api-resources
+kubectl get pod
+kubectl explain {pod} : 리소스에 대한 설명 확인

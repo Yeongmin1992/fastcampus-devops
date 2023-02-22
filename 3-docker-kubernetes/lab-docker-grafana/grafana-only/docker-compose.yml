@@ -3,13 +3,15 @@ version: '3.9'
 services:
   grafana:
     image: grafana/grafana:8.2.2
+    # always는 도커 컨테이너에 오류가 발생할 경우 재시작을 해줌
+    # unless-stopped 옵션은 always 옵션보다 강한 옵션으로 EC2 자체가 재시작 되어도 컨테이너를 새로 띄워줌
     restart: unless-stopped
     environment:
       GF_INSTALL_PLUGINS: grafana-clock-panel
     ports:
     - 3000:3000
     volumes:
-    # 호스트의 grfana 설정 파일에 grafana 컨테이너가 제공하는 grafana 설정 파일을 read only로 마운트
+    # 호스트의 grafana 설정 파일에 grafana 컨테이너가 제공하는 grafana 설정 파일을 read only로 마운트
     - ./files/grafana.ini:/etc/grafana/grafana.ini:ro
     # 아래서 생성한 볼륨을 로컬 데이터 저장경로인 /var/lib/grafana에 마운트
     - grafana-data:/var/lib/grafana
