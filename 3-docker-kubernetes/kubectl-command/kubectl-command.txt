@@ -2,7 +2,30 @@ kubectl은 쿠버네티스를 위한 cli 도구
 kustomize는 쿠버네티스의 매니페스트 파일을 좀 더 효율적으로 관리할 수 있도록 도와주는 도구
 
 minikube start : 미니쿠베 시작
+쿠버네티스 클러스터 상의 pod ip에 그냥 ubuntu에서 curl 명령어 날리면 응답을 받지 못함 -> 동일 클러스터에 들어가 있어야 함
+minikube ssh : 미니쿠베가 만든 클러스터 노드로 쉘 명령어 접근
+위 방법과 다르게 쿠버네티스 클러스터 상의 pod에서 다른 pod로 접근하기
+kubectl run -i -t debug --image=posquit0/doraemon bash 명령어 입력 후 curl 명령어를 사용하면 동일 클러스터 상에 존재하는 pod에서 응답 받기 가능
 kubectl get node
 kubectl api-resources
+kubectl api-resources | grep pod : pod 관련된 리소스들만 확인
 kubectl get pod
+kubectl get pod -o wide : 위 보다 더욱 많은 정보 확인 가능
 kubectl explain {pod} : 리소스에 대한 설명 확인
+kubectl run -i -t ubuntu --image ubuntu:focal bash
+-i : interactive option
+-t : tty option
+-> bash 명령어는 foreground로 실행되지 않음(interactive한 표준 입력을 필요로 함) -> 이럴 때 -i -t 옵션 사용
+kubectl apply -f deployment.yaml
+-f : file option
+kubectl get all
+kubectl get node -o wide : node ip등 정보 확인
+기본적인 kubernetes의 resource에 대해 기본적인 crud를 할 때는 선언형 방식 추천, ssh, logs, port forward시에는 명령형 이용
+watch kubectl get pod --show-labels: labels를 포함한 pod의 데이터를 계속 갱신해 줌
+kubectl get replicasets
+kubectl describe replicatsets hello
+kubectl etid pod {pod name} : pod yaml 정보 수정 가능
+kubectl api-resources | grep replicaset
+spec.selector의 matchLabels에 대응되는 pod를 관리하는데, 해당 pod가 replicaset이 관리하는 pod인지 까지는 보지 않음
+-> dummy-pod.yaml로 app = hello lable로 pod를 만들고 replicaset.yaml로 pod를 생성하면 target인 3개의 pod를 맞추기 위해 2개만 새로 뜸
+-> replicaset.yaml로 생성된 2개의 pod 중 하나의 app lable을 바꾸면 app = hello로 새로운 pod 한 개 더 띄움
