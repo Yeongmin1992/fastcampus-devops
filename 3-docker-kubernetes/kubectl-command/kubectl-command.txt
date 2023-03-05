@@ -24,8 +24,21 @@ kubectl get node -o wide : node ip등 정보 확인
 watch kubectl get pod --show-labels: labels를 포함한 pod의 데이터를 계속 갱신해 줌
 kubectl get replicasets
 kubectl describe replicatsets hello
+kubectl describe service hello
 kubectl etid pod {pod name} : pod yaml 정보 수정 가능
 kubectl api-resources | grep replicaset
 spec.selector의 matchLabels에 대응되는 pod를 관리하는데, 해당 pod가 replicaset이 관리하는 pod인지 까지는 보지 않음
 -> dummy-pod.yaml로 app = hello lable로 pod를 만들고 replicaset.yaml로 pod를 생성하면 target인 3개의 pod를 맞추기 위해 2개만 새로 뜸
 -> replicaset.yaml로 생성된 2개의 pod 중 하나의 app lable을 바꾸면 app = hello로 새로운 pod 한 개 더 띄움
+diff : yaml 파일들 끼리의 차이점을 확인해 줌
+kubectl rollout history deployment rolling(리소스 명) : rolling history의 revision 확인
+kubectl set image deployment rolling nginx=nginxdemos/hello:latest 
+kubectl rollout history -f roling-update.yaml
+kubectl rollout undo deployment rolling --to-revision=1 : 첫 번째 revision으로 roll back
+kubectl rollout status deployment rolling : rollout의 상태 확인
+서비스 객체를 만들면 클러스터 내에서 서비스 객체간에 통신을 할 때 해당 서비스의 이름을 통해서 통신이 가능
+-> kubectl run -i -t test --image=posquit-/doraemon bash 로 test 클러스터를 만든 후 bash 쉘 접속
+-> curl http://hello:8080 하면 기 생성한 hello라는 서비스 이름으로 통신 가능
+kubectl exec -it test bash : 위에서 만든 test 클러스터에 bash 쉘 접속
+kubectl cluster-info dump | grep -m 1 service-cluster-ip-range: 서비스의 cluster ip 대역 확인
+노드 포트를 활용하면 외부에서 traffic 받기 가능. minikube나 kubectl run으로 동일 cluster에 들어가지 않아도 curl 응답 받을 수 있음

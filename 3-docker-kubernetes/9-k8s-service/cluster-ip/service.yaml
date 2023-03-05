@@ -9,7 +9,15 @@ spec:
   ports:
   - name: http
     protocol: TCP
+    # cluster ip
     port: 8080
+    # pod ip의 target port로 traffic을 전달하게 됨
     targetPort: 80
+  # 중요!! 서비스가 어떤 pod에게 traffic을 전달할지 결정
+  # 동일 경로의 deployment.yaml 에서 labels를 app: hello로 설정하여 만들어진 pod들과 연결됨
   selector:
     app: hello
+    
+# 서비스 객체를 만들면 클러스터 내에서 서비스 객체간에 통신을 할 때 해당 서비스의 이름을 통해서 통신이 가능
+# -> kubectl run -i -t test --image=posquit-/doraemon bash 로 test 클러스터를 만든 후 bash 쉘 접속
+# -> curl http://hello:8080 하면 기 생성한 hello라는 서비스 이름으로 통신 가능

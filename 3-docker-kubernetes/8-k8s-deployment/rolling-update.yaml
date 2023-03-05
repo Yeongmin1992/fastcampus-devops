@@ -8,7 +8,9 @@ spec:
     rollingUpdate:
       maxSurge: 1
       maxUnavailable: 0
+  # 새로운 pod가 띄워진 후 5초간 준비시간 갖기
   minReadySeconds: 5
+  # 새로운 replica set을 만들면서 image 버전이 업데이트될 때마다 갖고 있을 revision 수
   revisionHistoryLimit: 5
   replicas: 5
   selector:
